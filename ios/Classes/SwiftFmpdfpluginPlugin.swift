@@ -1,6 +1,7 @@
 import Flutter
 import UIKit
 import PDFKit
+import CoreGraphics
 
 extension FlutterError {
     static let noArgument: FlutterError = .init(code: "noArgument", message: nil, details: nil)
@@ -28,7 +29,7 @@ public class SwiftFmpdfpluginPlugin: NSObject, FlutterPlugin {
     let pdfView = PDFView()
     pdfView.autoScales = true
     pdfView.frame = viewController.view.bounds
-    if call.method == "show_pdf" {
+    if call.method == "show_pdf_with_local_file" {
         guard let filePath = arguments["file_path"] as? String, let fileData = try? Data(contentsOf: URL(fileURLWithPath: filePath)) else {
             result(FlutterError.unexpectedArgument)
             return
@@ -51,6 +52,19 @@ public class SwiftFmpdfpluginPlugin: NSObject, FlutterPlugin {
         }
         pdfView.document = document
         viewController.view.addSubview(pdfView)
+        result(data)
+    } else if call.method == "show_pdf_with_network" {
+        guard let urlPath = arguments["url"] as? String, let url = URL(string: urlPath), let fileData = try? Data(contentsOf: url) else {
+            result(FlutterError.unexpectedArgument)
+            return
+        }
+        guard let document = PDFDocument(data: fileData) else {
+            result(FlutterError.failedToDecodePdfData)
+            return
+        }
+        pdfView.document = document
+        viewController.view.addSubview(pdfView)
+        result(fileData)
     } else {
         result("iOS " + UIDevice.current.systemVersion)
     }

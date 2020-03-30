@@ -19,12 +19,7 @@ class ShowPdfPage extends StatelessWidget {
           child: IconButton(
             icon: Icon(Icons.picture_as_pdf),
             onPressed: () async {
-              String path = await getTempPath();
-              path = path + "/sample.pdf";
-              File file = await File(path).create(recursive: true);
-              ByteData pdfData = await rootBundle.load("assets/sample.pdf");
-              final writtenFile = await file.writeAsBytes(pdfData.buffer.asUint8List(), flush: true);
-              final Uint8List fileData = await Fmpdfplugin.showPdfWithLocalFile(file: writtenFile);
+              final Uint8List _ = await Fmpdfplugin.showPdfWithNetwork(fileURL: "PDF_FILE_URL");
             },
           ),
         ),

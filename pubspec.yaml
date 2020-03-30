@@ -1,8 +1,7 @@
 name: fmpdfplugin
 description: A pdf plugin.
-version: 0.0.1
-author:
-homepage:
+version: 0.0.2
+homepage: https://github.com/fummicc1/Fmpdfplugin
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

@@ -14,7 +14,7 @@ class Fmpdfplugin {
   }
 
   static Future showPdfWithLocalFile({File file}) async {
-    final result = await _channel.invokeMethod("show_pdf", {
+    final result = await _channel.invokeMethod("show_pdf_with_local_file", {
       "file_path": file.path
     });
     return result;
@@ -23,6 +23,13 @@ class Fmpdfplugin {
   static Future showPdfWithData({Uint8List pdfData}) async {
     final result = await _channel.invokeMethod("show_pdf_with_data", {
       "data": pdfData
+    });
+    return result;
+  }
+
+  static Future showPdfWithNetwork({String fileURL}) async {
+    final result = await _channel.invokeMethod("show_pdf_with_network", {
+      "url": fileURL
     });
     return result;
   }
