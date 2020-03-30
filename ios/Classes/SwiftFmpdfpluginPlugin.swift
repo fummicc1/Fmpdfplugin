@@ -40,7 +40,7 @@ public class SwiftFmpdfpluginPlugin: NSObject, FlutterPlugin {
         pdfView.document = document
         viewController.view.addSubview(pdfView)
         result(fileData)
-    } else if call.method == "show_pdf_from_data" {
+    } else if call.method == "show_pdf_with_data" {
         guard let data = arguments["data"] as? Data else {
             result(FlutterError.unexpectedArgument)
             return

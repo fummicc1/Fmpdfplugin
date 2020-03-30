@@ -13,15 +13,15 @@ class Fmpdfplugin {
     return version;
   }
 
-  static Future showPdfFromLocal({File file}) async {
+  static Future showPdfWithLocalFile({File file}) async {
     final result = await _channel.invokeMethod("show_pdf", {
       "file_path": file.path
     });
     return result;
   }
 
-  static Future showPdfFromData({Uint8List pdfData}) async {
-    final result = await _channel.invokeMethod("show_pdf_from_data", {
+  static Future showPdfWithData({Uint8List pdfData}) async {
+    final result = await _channel.invokeMethod("show_pdf_with_data", {
       "data": pdfData
     });
     return result;

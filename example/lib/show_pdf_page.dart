@@ -24,7 +24,7 @@ class ShowPdfPage extends StatelessWidget {
               File file = await File(path).create(recursive: true);
               ByteData pdfData = await rootBundle.load("assets/sample.pdf");
               final writtenFile = await file.writeAsBytes(pdfData.buffer.asUint8List(), flush: true);
-              final Uint8List fileData = await Fmpdfplugin.showPdfFromLocal(file: writtenFile);
+              final Uint8List fileData = await Fmpdfplugin.showPdfWithLocalFile(file: writtenFile);
             },
           ),
         ),
